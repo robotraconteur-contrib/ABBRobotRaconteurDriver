@@ -27,7 +27,7 @@ using System.Threading.Tasks;
 using com.robotraconteur.geometry;
 using com.robotraconteur.action;
 using com.robotraconteur.robotics.trajectory;
-using RobotRaconteurWeb.Robot;
+using RobotRaconteurWeb.StandardRobDefLib.Robot;
 
 namespace ABBRobotRaconteurDriver
 {

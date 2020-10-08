@@ -16,8 +16,9 @@ These instructions assume that the robot is fully operational, and has the EGM o
       4. Select "Transmission Protocol"
       5. Select "UCdevice"
       6. Set "Remote Device" to the IP address of the computer running the ABB Robot Raconteur Driver
-      7. Tap "OK"
-      8. Click "X" (top right) to close the configuration
+      7. Set "Interface" to "WAN"
+      8. Tap "OK"
+      9. Click "X" (top right) to close the configuration
    2. Configure the EGM settings
       1. Select (menu) -> Control Panel
       2. Select "Configuration"

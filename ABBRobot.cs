@@ -16,7 +16,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using RobotRaconteurWeb;
+using RobotRaconteur;
 using com.robotraconteur.robotics.robot;
 using System.IO;
 using System.Linq;
@@ -27,7 +27,7 @@ using System.Threading.Tasks;
 using com.robotraconteur.geometry;
 using com.robotraconteur.action;
 using com.robotraconteur.robotics.trajectory;
-using RobotRaconteurWeb.StandardRobDefLib.Robot;
+using RobotRaconteur.Companion.Robot;
 
 namespace ABBRobotRaconteurDriver
 {
@@ -79,7 +79,8 @@ namespace ABBRobotRaconteurDriver
         protected override void _run_timestep(long now)
         {
             egm_client.GetState(out var egm_last_recv, out bool egm_enabled, out bool egm_ready, out var egm_joint_pos, out var egm_tcp_pos);
-
+            // TODO: Need to get operational mode!
+            _operational_mode = RobotOperationalMode.auto;
             _last_joint_state = egm_last_recv;
             _last_endpoint_state = egm_last_recv;
             _last_robot_state = egm_last_recv;
@@ -93,7 +94,7 @@ namespace ABBRobotRaconteurDriver
             {
                 _joint_position = new double[0];
             }
-            _endpoint_pose = egm_tcp_pos;
+            _endpoint_pose = new Pose[] { egm_tcp_pos };
 
             base._run_timestep(now);
 

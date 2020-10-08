@@ -16,8 +16,9 @@
 using System;
 using System.Collections.Generic;
 using Mono.Options;
-using RobotRaconteurWeb;
-using RobotRaconteurWeb.InfoParser;
+using Mono.Unix;
+using RobotRaconteur;
+using RobotRaconteur.Companion.InfoParser;
 
 namespace ABBRobotRaconteurDriver
 {
@@ -28,10 +29,12 @@ namespace ABBRobotRaconteurDriver
 
             bool shouldShowHelp = false;
             string robot_info_file = null;
+            bool wait_signal = false;
 
             var options = new OptionSet {
                 { "robot-info-file=", n => robot_info_file = n },
-                { "h|help", "show this message and exit", h => shouldShowHelp = h != null }
+                { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
+                {"wait-signal", "wait for POSIX sigint or sigkill to exit", n=> wait_signal = n!=null}
             };
 
             List<string> extra;
@@ -74,16 +77,32 @@ namespace ABBRobotRaconteurDriver
                 using (var robot = new ABBRobot(robot_info.Item1))
                 {
                     robot._start_robot();
-                    using (var node_setup = new ServerNodeSetup("ABB_robot", 58651))
+                    using (var node_setup = new ServerNodeSetup("ABB_robot", 58651,args))
                     {
 
 
-                        RobotRaconteurNode.s.RegisterService("abb_robot", "com.robotraconteur.robotics.robot", robot);
+                        RobotRaconteurNode.s.RegisterService("robot", "com.robotraconteur.robotics.robot", robot);
 
-                        Console.WriteLine("Press enter to exit");
-                        Console.ReadKey();
+                        if (!wait_signal)
+                        {
+                            Console.WriteLine("Press enter to exit");
+                            Console.ReadKey();
+                        }
+                        else
+                        {
+                            UnixSignal[] signals = new UnixSignal[]{
+                                new UnixSignal (Mono.Unix.Native.Signum.SIGINT),
+                                new UnixSignal (Mono.Unix.Native.Signum.SIGTERM),
+                            };
 
-                        RobotRaconteurNode.s.Shutdown();
+                            Console.WriteLine("Press Ctrl-C to exit");
+                            // block until a SIGINT or SIGTERM signal is generated.
+                            int which = UnixSignal.WaitAny(signals, -1);
+
+                            Console.WriteLine("Got a {0} signal, exiting", signals[which].Signum);
+                        }
+
+
                     }
                 }
             }

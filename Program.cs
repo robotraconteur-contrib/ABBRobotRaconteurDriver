@@ -81,7 +81,8 @@ namespace ABBRobotRaconteurDriver
                     {
 
 
-                        RobotRaconteurNode.s.RegisterService("robot", "com.robotraconteur.robotics.robot", robot);
+                        var service_ctx = RobotRaconteurNode.s.RegisterService("robot", "com.robotraconteur.robotics.robot", robot);
+                        service_ctx.SetServiceAttributes(RobotRaconteur.Companion.Util.AttributesUtil.GetDefaultServiceAtributesFromDeviceInfo(robot_info.Item1.device_info));
 
                         if (!wait_signal)
                         {

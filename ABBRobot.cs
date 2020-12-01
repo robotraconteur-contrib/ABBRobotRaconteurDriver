@@ -43,7 +43,8 @@ namespace ABBRobotRaconteurDriver
             _has_velocity_command = false;
             _update_period = 4;
             robot_info.robot_capabilities &= (uint)(RobotCapabilities.jog_command & RobotCapabilities.position_command & RobotCapabilities.trajectory_command);
-            
+
+            this._trajectory_error_tol = 1000;
         }
 
         public override void _start_robot()

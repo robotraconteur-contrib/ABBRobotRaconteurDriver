@@ -74,6 +74,11 @@ namespace ABBRobotRaconteurDriver
             if (joint_pos_cmd != null)
             {
                 egm_client.SetCommandPosition(joint_pos_cmd);
+                _position_command = joint_pos_cmd;
+            }
+            else
+            {
+                _position_command = null;
             }
         }
 

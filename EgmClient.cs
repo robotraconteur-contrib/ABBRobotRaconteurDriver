@@ -124,9 +124,9 @@ namespace ABBRobotRaconteurDriver
                     }
 
                     var cart = egm_robot.FeedBack.Cartesian;
-                    tcp_pose.position.x = cart.Pos.X;
-                    tcp_pose.position.y = cart.Pos.Y;
-                    tcp_pose.position.z = cart.Pos.Z;
+                    tcp_pose.position.x = cart.Pos.X/1000.0;
+                    tcp_pose.position.y = cart.Pos.Y/1000.0;
+                    tcp_pose.position.z = cart.Pos.Z/1000.0;
                     tcp_pose.orientation.w = cart.Orient.U0;
                     tcp_pose.orientation.x = cart.Orient.U1;
                     tcp_pose.orientation.y = cart.Orient.U2;

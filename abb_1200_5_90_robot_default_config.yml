@@ -7,7 +7,7 @@ device_info:
   model:
     name: ABB_1200_5_90
     uuid: 9ad3c0ee-ec5e-4057-a297-d340e1484f01
-  user_description: Rethink Robotics Sawyer Robot
+  user_description: ABB Robot
   serial_number: 123456789
   device_classes:
     - class_identifier:

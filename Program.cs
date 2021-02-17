@@ -30,9 +30,11 @@ namespace ABBRobotRaconteurDriver
             bool shouldShowHelp = false;
             string robot_info_file = null;
             bool wait_signal = false;
+            string robot_name = null;
 
             var options = new OptionSet {
                 { "robot-info-file=", n => robot_info_file = n },
+                { "robot-name=", "override the robot device name", n=>robot_name = n },
                 { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
                 {"wait-signal", "wait for POSIX sigint or sigkill to exit", n=> wait_signal = n!=null}
             };
@@ -68,7 +70,7 @@ namespace ABBRobotRaconteurDriver
             }
 
 
-            var robot_info = RobotInfoParser.LoadRobotInfoYamlWithIdentifierLocks(robot_info_file);
+            var robot_info = RobotInfoParser.LoadRobotInfoYamlWithIdentifierLocks(robot_info_file,robot_name);
             using (robot_info.Item2)
             {
 

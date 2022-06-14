@@ -15,7 +15,7 @@ These instructions assume that the robot is fully operational, and has the EGM o
       3. Select "Topics" -> "Communication"
       4. Select "IP Setting"
       5. Select "Add"
-      6. Set "Interface" WAN
+      6. Set "Interface" to WAN
       7. Set IP address of IRC5 Controller
       8. Tap "OK"
    2. Configure the control computer IP address

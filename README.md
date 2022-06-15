@@ -13,13 +13,20 @@ These instructions assume that the robot is fully operational, and has the EGM o
       1. Select (menu) -> Control Panel
       2. Select "Configuration"
       3. Select "Topics" -> "Communication"
+      4. Select "IP Setting"
+      5. Select "Add"
+      6. Set "Interface" to WAN
+      7. Set IP address of IRC5 Controller
+      8. Tap "OK"
+   2. Configure the control computer IP address
+      1. Select (menu) -> Control Panel
+      2. Select "Configuration"
+      3. Select "Topics" -> "Communication"
       4. Select "Transmission Protocol"
       5. Select "UCdevice"
       6. Set "Remote Device" to the IP address of the computer running the ABB Robot Raconteur Driver
-      7. Set "Interface" to "WAN"
-      8. Tap "OK"
-      9. Click "X" (top right) to close the configuration
-   2. Configure the EGM settings
+      7. Tap "OK"
+   3. Configure the EGM settings
       1. Select (menu) -> Control Panel
       2. Select "Configuration"
       3. Select "Topics" -> "Motion"
@@ -30,12 +37,12 @@ These instructions assume that the robot is fully operational, and has the EGM o
       8. Set "Do Not Restart after Motors Off" to "Yes"
       9. Set "Default Ramp Time" to 0.1
       10. Tap "Ok"
-      11. Click "X" (top right) to close the configuration
 2. Load the RAPID program. Complete the following:
-   1. Select (menu) -> Control Panel
-   2. Select "File" -> "New Program"
-   3. Enter the program listed in rapid/egm.mod
+   1. Select (menu) -> Production Window
+   2. Select "Load Module"
+   3. Load (.pgf) program
       1. (Note: If you have Robot Studio it is much easier to transfer the program using the RAPID editor on a PC. See Step 5 in the Robot Studio Setup Instructions)
+      2. (Note: .pgf could be created from RobotStudio, save to .pgf on controller)
 3. Run the RAPID program
    1. Select (menu) -> Production Window
    2. Tap "PP to Main"

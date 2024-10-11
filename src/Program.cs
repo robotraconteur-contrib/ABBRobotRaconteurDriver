@@ -78,7 +78,7 @@ namespace ABBRobotRaconteurDriver
                 using (var robot = new ABBRobot(robot_info.Item1))
                 {
                     robot._start_robot();
-                    using (var node_setup = new ServerNodeSetup("ABB_robot", 58651,args))
+                    using (var node_setup = new ServerNodeSetup("abb_robot", 58651,args))
                     {
 
 

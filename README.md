@@ -51,13 +51,13 @@ The .NET 6.0 runtime is required to run the driver. This driver will run on Wind
 The driver can be run using the following command:
 
 ```
-ABBRobotRaconteurDriver.exe --robot-info-file=config/abb_irb1200_5_90_robot_default_config.yml
+ABBRobotRaconteurDriver.exe --robot-info-file=config/abb_1200_5_90_robot_default_config.yml
 ```
 
 Use the `dotnet` command to run the driver on Linux:
 
 ```
-dotnet ABBRobotRaconteurDriver.dll --robot-info-file=config/abb_irb1200_5_90_robot_default_config.yml
+dotnet ABBRobotRaconteurDriver.dll --robot-info-file=config/abb_1200_5_90_robot_default_config.yml
 ```
 
 Use the appropriate robot info file for your robot.
@@ -65,10 +65,10 @@ Use the appropriate robot info file for your robot.
 ## Running the driver using docker
 
 On Linux it is possible to run the driver using docker. The following command will run the driver using the
-`abb_irb1200_5_90_robot_default_config.yml` robot info file:
+`abb_1200_5_90_robot_default_config.yml` robot info file:
 
 ```
-sudo docker run --rm --net=host --privileged -v /var/run/robotraconteur:/var/run/robotraconteur -v /var/lib/robotraconteur:/var/lib/robotraconteur wasontech/abb-robotraconteur-driver /opt/abb_robotraconteur_driver/bin/ABBRobotRaconteurDriver --robot-info-file=/config/abb_irb1200_5_90_robot_default_config.yml
+sudo docker run --rm --net=host --privileged -v /var/run/robotraconteur:/var/run/robotraconteur -v /var/lib/robotraconteur:/var/lib/robotraconteur wasontech/abb-robotraconteur-driver /opt/abb_robotraconteur_driver/ABBRobotRaconteurDriver --robot-info-file=/config/abb_1200_5_90_robot_default_config.yml
 ```
 
  It may be necessary to mount a docker "volume" to access configuration yml files that are not included in the docker image. 

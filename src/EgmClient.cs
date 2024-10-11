@@ -62,6 +62,9 @@ namespace ABBRobotRaconteurDriver
                 }
                 catch (Exception e)
                 {
+                    if (!keep_going)
+                        return;
+
                     Console.WriteLine($"Robot communication error: {e.ToString()}");
                     LastException = e;
                 }

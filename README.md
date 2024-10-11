@@ -1,6 +1,80 @@
+<p align="center"><img src="https://raw.githubusercontent.com/robotraconteur/robotraconteur/refs/heads/master/docs/figures/logo-header.svg"></p>
+
 # Robot Raconteur ABB IRC5 Driver
 
-## Setup Instructions
+## Introduction
+
+Robot Raconteur standard robot driver for ABB robots using the IRC5 controller.
+
+This driver communicates with the robot using the Externally Guided Motion (EGM). EGM provides real-time
+streaming control of the robot position. This driver uses the real-time control to directly control the robot
+motion. There is another driver [abb_motion_program_exec](https://github.com/rpirobotics/abb_motion_program_exec)
+that uses motion program commands instead of direct position control. The `abb_motion_program_exec` driver uses
+the built-in motion program interpreter in the IRC5 controller to execute motion programs instead of directly
+controlling the robot position. Use whichever driver is most appropriate for your application.
+
+Example driver clients are in the `examples/` directory. This driver supports jog, position, and trajectory
+command modes for the standard `com.robotraconteur.robotics.robot.Robot` service type.
+
+The [Robot Raconteur Training Simulator](https://github.com/robotraconteur-contrib/robotraconteur_training_sim) contains a simulated ABB IRB 1200 robot in the multi-robot scene.
+
+## Connection Info
+
+The default connection information is as follows. These details may be changed using `--robotraconteur-*` command
+line options when starting the service. Also see the
+[Robot Raconteur Service Browser](https://github.com/robotraconteur/RobotRaconteur_ServiceBrowser) to detect
+services on the network.
+
+- URL: `rr+tcp://localhost:58651?service=robot`
+- Device Name: `abb_robot`
+- Node Name: `abb_robot`
+- Service Name: `robot`
+- Root Object Type:
+  - `com.robotraconteur.robotics.robot.Robot`
+
+## Command Line Arguments
+
+The following command line arguments are available:
+
+* `--robot-info-file=` - The robot info file. Info files are available in the `config/` directory. See [robot info file documentation](https://github.com/robotraconteur/robotraconteur_standard_robdef/blob/master/docs/info_files/robot.md)
+* `--robot-name=` - Overrides the robot device name. Defaults to `abb_robot`.
+
+The [common Robot Raconteur node options](https://github.com/robotraconteur/robotraconteur/wiki/Command-Line-Options) are also available.
+
+## Running the driver
+
+Zip files containing the driver are available on the 
+[Releases](https://github.com/robotraconteur-contrib/ABBRobotRaconteurDriver/releases) page. 
+Download the zip file and extract it to a directory.
+The .NET 6.0 runtime is required to run the driver. This driver will run on Windows and Linux.
+
+The driver can be run using the following command:
+
+```
+ABBRobotRaconteurDriver.exe --robot-info-file=config/abb_irb1200_5_90_robot_default_config.yml
+```
+
+Use the `dotnet` command to run the driver on Linux:
+
+```
+dotnet ABBRobotRaconteurDriver.dll --robot-info-file=config/abb_irb1200_5_90_robot_default_config.yml
+```
+
+Use the appropriate robot info file for your robot.
+
+## Running the driver using docker
+
+On Linux it is possible to run the driver using docker. The following command will run the driver using the
+`abb_irb1200_5_90_robot_default_config.yml` robot info file:
+
+```
+sudo docker run --rm --net=host --privileged -v /var/run/robotraconteur:/var/run/robotraconteur -v /var/lib/robotraconteur:/var/lib/robotraconteur wasontech/abb-robotraconteur-driver /opt/abb_robotraconteur_driver/bin/ABBRobotRaconteurDriver --robot-info-file=/config/abb_irb1200_5_90_robot_default_config.yml
+```
+
+ It may be necessary to mount a docker "volume" to access configuration yml files that are not included in the docker image. 
+ See the docker documentation for instructions on mounting a local directory as a volume so it can be accessed inside the docker.
+
+## Robot Setup Instructions
 
 **This driver requires the IRC5 EGM control option.**
 
@@ -97,4 +171,11 @@ These instructions use the ABB IRB 1200-7/0.7 robot as an example. Other robots 
 
 At this point, the robot and driver should be running. Save the workspace. In starting the simulation in the future, or when recovering from an error, repeat Step 6.
 
-   
+## Acknowledgment
+
+This work was supported in part by the Advanced Robotics for Manufacturing ("ARM") Institute under Agreement Number W911NF-17-3-0004 sponsored by the Office of the Secretary of Defense. The views and conclusions contained in this document are those of the authors and should not be interpreted as representing the official policies, either expressed or implied, of either ARM or the Office of the Secretary of Defense of the U.S. Government. The U.S. Government is authorized to reproduce and distribute reprints for Government purposes, notwithstanding any copyright notation herein.
+
+This work was supported in part by the New York State Empire State Development Division of Science, Technology and Innovation (NYSTAR) under contract C160142.
+
+![](https://github.com/robotraconteur/robotraconteur/blob/master/docs/figures/arm_logo.jpg?raw=true)
+![](https://github.com/robotraconteur/robotraconteur/blob/master/docs/figures/nys_logo.jpg?raw=true)

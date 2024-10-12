@@ -1,4 +1,4 @@
-exclude: ^(bin|obj|.vs|.vscode|.idea|*.csproj|*.sln|*.user|*.suo|*.cache|*.pdb|*.dll|*.exe|*.log|*.tmp|*.nupkg|*.nuspec|packages|TestResults|Generated_Code|generated_src)/.*$
+exclude: ^(bin|obj|\.vs|\.vscode|TestResults|Generated_Code|generated_src)/.*$
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: "v4.5.0"
@@ -52,11 +52,11 @@ repos:
     args: ["-n", "-o"]
     files: '\.(c|cpp|h|hpp|java|i|m|cmake|txt|css|js|ts|html|md|txt|py|yaml|yml|rst|py\.in|)$'
     language: system
--   repo: local
-    hooks:
+- repo: local
+  hooks:
     #Use dotnet format already installed on your machine
-    -   id: dotnet-format
-        name: dotnet-format
-        language: system 
-        entry: dotnet format --include 
-        types_or: ["c#", "vb"]
+  - id: dotnet-format
+    name: dotnet-format
+    language: system
+    entry: dotnet format --include
+    types_or: ["c#", "vb"]

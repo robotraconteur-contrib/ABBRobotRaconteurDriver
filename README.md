@@ -43,8 +43,8 @@ The [common Robot Raconteur node options](https://github.com/robotraconteur/robo
 
 ## Running the driver
 
-Zip files containing the driver are available on the 
-[Releases](https://github.com/robotraconteur-contrib/ABBRobotRaconteurDriver/releases) page. 
+Zip files containing the driver are available on the
+[Releases](https://github.com/robotraconteur-contrib/ABBRobotRaconteurDriver/releases) page.
 Download the zip file and extract it to a directory.
 The .NET 6.0 runtime is required to run the driver. This driver will run on Windows and Linux.
 
@@ -71,7 +71,7 @@ On Linux it is possible to run the driver using docker. The following command wi
 sudo docker run --rm --net=host --privileged -v /var/run/robotraconteur:/var/run/robotraconteur -v /var/lib/robotraconteur:/var/lib/robotraconteur wasontech/abb-robotraconteur-driver /opt/abb_robotraconteur_driver/ABBRobotRaconteurDriver --robot-info-file=/config/abb_1200_5_90_robot_default_config.yml
 ```
 
- It may be necessary to mount a docker "volume" to access configuration yml files that are not included in the docker image. 
+ It may be necessary to mount a docker "volume" to access configuration yml files that are not included in the docker image.
  See the docker documentation for instructions on mounting a local directory as a volume so it can be accessed inside the docker.
 
 ## Robot Setup Instructions

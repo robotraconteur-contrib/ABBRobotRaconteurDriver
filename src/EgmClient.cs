@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
@@ -21,8 +21,8 @@ namespace ABBRobotRaconteurDriver
         Func<long> now_func;
 
         public void Start(int egm_port, Func<long> now_func, int joint_count)
-        {            
-            port = egm_port;            
+        {
+            port = egm_port;
             keep_going = true;
             this.now_func = now_func;
 
@@ -90,7 +90,7 @@ namespace ABBRobotRaconteurDriver
             {
                 for (int i = 0; i < joint_cmd.Length; i++)
                 {
-                    egm_sensor.Planned.Joints.Joints[i] = joint_cmd[i] * (180.0/Math.PI);
+                    egm_sensor.Planned.Joints.Joints[i] = joint_cmd[i] * (180.0 / Math.PI);
                 }
 
                 var egm_sensor_bytes = egm_sensor.ToByteArray();
@@ -106,7 +106,7 @@ namespace ABBRobotRaconteurDriver
         bool enabled;
 
         private void DoRecvEgm(UdpClient egm_socket, ref IPEndPoint ep)
-        {            
+        {
             var recv = egm_socket.Receive(ref ep);
             egm_robot = new EgmRobot();
             egm_robot.MergeFrom(new CodedInputStream(recv));
@@ -121,15 +121,15 @@ namespace ABBRobotRaconteurDriver
                         actual_joint_position = new double[joint_msg.Count];
                     }
 
-                    for (int i=0; i<joint_msg.Count; i++)
+                    for (int i = 0; i < joint_msg.Count; i++)
                     {
-                        actual_joint_position[i] = joint_msg[i] * (Math.PI/180.0);
+                        actual_joint_position[i] = joint_msg[i] * (Math.PI / 180.0);
                     }
 
                     var cart = egm_robot.FeedBack.Cartesian;
-                    tcp_pose.position.x = cart.Pos.X/1000.0;
-                    tcp_pose.position.y = cart.Pos.Y/1000.0;
-                    tcp_pose.position.z = cart.Pos.Z/1000.0;
+                    tcp_pose.position.x = cart.Pos.X / 1000.0;
+                    tcp_pose.position.y = cart.Pos.Y / 1000.0;
+                    tcp_pose.position.z = cart.Pos.Z / 1000.0;
                     tcp_pose.orientation.w = cart.Orient.U0;
                     tcp_pose.orientation.x = cart.Orient.U1;
                     tcp_pose.orientation.y = cart.Orient.U2;
@@ -149,7 +149,7 @@ namespace ABBRobotRaconteurDriver
 
         public void GetState(out long last_recv, out bool enabled, out bool ready, out double[] joint_pos, out com.robotraconteur.geometry.Pose tcp_pose)
         {
-            lock(this)
+            lock (this)
             {
                 last_recv = this.last_recv;
                 joint_pos = this.actual_joint_position;
@@ -163,7 +163,7 @@ namespace ABBRobotRaconteurDriver
 
         public void StopMotion()
         {
-            lock(this)
+            lock (this)
             {
                 if (!motion_stopped)
                 {
@@ -182,7 +182,7 @@ namespace ABBRobotRaconteurDriver
                 {
                     if (position.Length != actual_joint_position.Length)
                         throw new ArgumentException("Invalid joint array length");
-                }            
+                }
                 joint_cmd = position;
             }
         }

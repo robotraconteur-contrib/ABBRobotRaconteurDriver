@@ -21,8 +21,8 @@ jobs:
       run: dotnet publish -c Release /p:Platform="Any CPU" --framework=net6.0 -o abb_robotraconteur_driver
     - name: copy license and readme
       run: |
-         Copy-Item -Path LICENSE.txt -Destination abb_robotraconteur_driver
-         Copy-Item -Path README.md -Destination abb_robotraconteur_driver
+        Copy-Item -Path LICENSE.txt -Destination abb_robotraconteur_driver
+        Copy-Item -Path README.md -Destination abb_robotraconteur_driver
     - name: zip
       run: Compress-Archive -Path abb_robotraconteur_driver -DestinationPath abb_robotraconteur_driver.zip
     - name: upload

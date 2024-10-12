@@ -30,3 +30,19 @@ jobs:
       with:
         name: abb_robotraconteur_driver
         path: abb_robotraconteur_driver.zip
+  pre-commit:
+    runs-on: ubuntu-22.04
+    env:
+      SKIP: no-commit-to-branch
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v3
+    - name: apt
+      run: |
+        sudo apt update
+        sudo apt install -y dos2unix
+    - name: Setup dotnet 6.x
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.x
+    - uses: pre-commit/action@v3.0.1

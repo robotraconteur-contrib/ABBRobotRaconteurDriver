@@ -10,14 +10,14 @@ device_info:
   user_description: ABB Robot
   serial_number: 123456789
   device_classes:
-    - class_identifier:
-        name: robot
-        uuid: 39b513e7-21b9-4b49-8654-7537473030eb
-      subclasses: 
-        - serial
-        - serial_six_axis        
+  - class_identifier:
+      name: robot
+      uuid: 39b513e7-21b9-4b49-8654-7537473030eb
+    subclasses:
+    - serial
+    - serial_six_axis
   implemented_types:
-    - com.robotraconteur.robotics.robot.Robot
+  - com.robotraconteur.robotics.robot.Robot
 robot_type: serial
 robot_capabilities:
 - jog_command
@@ -83,7 +83,7 @@ chains:
   - 2
   - 3
   - 4
-  - 5  
+  - 5
 joint_info:
 - default_effort_units: newton_meter
   default_units: radian

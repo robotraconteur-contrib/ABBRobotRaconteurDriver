@@ -1,0 +1,62 @@
+exclude: ^(bin|obj|\.vs|\.vscode|TestResults|Generated_Code|generated_src)/.*$
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: "v4.5.0"
+  hooks:
+  - id: check-added-large-files
+  - id: check-case-conflict
+  - id: check-merge-conflict
+  - id: check-symlinks
+  - id: check-yaml
+    exclude: .clang-format
+    args: ['--unsafe']
+  - id: check-ast
+  - id: check-docstring-first
+  - id: debug-statements
+  - id: end-of-file-fixer
+    exclude: (^.*\.cs$|^.*\.csproj$|^.*\.sln$)
+  - id: mixed-line-ending
+    exclude: (^.*\.cs$|^.*\.csproj$|^.*\.sln$)
+  - id: trailing-whitespace
+  - id: fix-byte-order-marker
+  - id: check-executables-have-shebangs
+  - id: check-shebang-scripts-are-executable
+  - id: check-json
+  - id: check-toml
+  - id: check-xml
+  - id: detect-private-key
+  - id: no-commit-to-branch
+    args: ['--branch', 'master']
+  - id: forbid-submodules
+- repo: https://github.com/hhatto/autopep8
+  rev: v2.0.4
+  hooks:
+  - id: autopep8
+    args: ["--ignore=E402", "-i", "--max-line-length=120"]
+- repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+  rev: v2.12.0
+  hooks:
+  - id: pretty-format-yaml
+    args: [--autofix, --indent, '2', '--preserve-quotes']
+    exclude: ^\.clang.*$
+# - repo: https://github.com/efrecon/pre-commit-hook-lxml
+#   rev: v0.1.1
+#   hooks:
+#   - id: format-xml
+#     exclude: ^.*\.svg$
+- repo: local
+  hooks:
+  - id: dos2unix
+    name: dos2unix
+    entry: dos2unix
+    args: ["-n", "-o"]
+    files: '\.(c|cpp|h|hpp|java|i|m|cmake|txt|css|js|ts|html|md|txt|py|yaml|yml|rst|py\.in|)$'
+    language: system
+- repo: local
+  hooks:
+    #Use dotnet format already installed on your machine
+  - id: dotnet-format
+    name: dotnet-format
+    language: system
+    entry: dotnet format --include
+    types_or: ["c#", "vb"]

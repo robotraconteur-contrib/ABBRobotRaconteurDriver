@@ -7,7 +7,7 @@ syntax = "proto2";
 package abb.egm;
 
 message EgmHeader
-{ 
+{
     optional uint32 seqno = 1; // sequence number (to be able to find lost messages)
     optional uint32 tm = 2;    // time stamp in ms
 
@@ -48,11 +48,11 @@ message EgmEuler				// Euler angle orientation in degrees, interpreted relative 
 }
 
 message EgmPose					// Pose (i.e. cartesian position and Quaternion orientation) interpreted relative to the sensor frame defined by EGMActPose
-{ 
+{
     optional EgmCartesian	pos = 1;
     optional EgmQuaternion	orient = 2;
 	optional EgmEuler		euler = 3;
-} 
+}
 
 message EgmCartesianSpeed 		// Array of 6 speed reference values in mm/s or degrees/s
 {
@@ -149,7 +149,7 @@ message EgmRobot
     optional EgmMCIState			mciState = 5;
     optional bool					mciConvergenceMet = 6;
     optional EgmTestSignals			testSignals = 7;
-    optional EgmRapidCtrlExecState	rapidExecState = 8; 
+    optional EgmRapidCtrlExecState	rapidExecState = 8;
 }
 
 

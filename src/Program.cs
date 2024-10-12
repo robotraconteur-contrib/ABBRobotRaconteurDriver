@@ -1,4 +1,4 @@
-﻿// Copyright 2020 Rensselaer Polytechnic Institute
+// Copyright 2020 Rensselaer Polytechnic Institute
 //                Wason Technology, LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -69,25 +69,25 @@ namespace ABBRobotRaconteurDriver
             }
 
 
-            var robot_info = RobotInfoParser.LoadRobotInfoYamlWithIdentifierLocks(robot_info_file,robot_name);
+            var robot_info = RobotInfoParser.LoadRobotInfoYamlWithIdentifierLocks(robot_info_file, robot_name);
             using (robot_info.Item2)
             {
 
-                
+
 
                 using (var robot = new ABBRobot(robot_info.Item1))
                 {
                     robot._start_robot();
-                    using (var node_setup = new ServerNodeSetup("abb_robot", 58651,args))
+                    using (var node_setup = new ServerNodeSetup("abb_robot", 58651, args))
                     {
 
 
                         var service_ctx = RobotRaconteurNode.s.RegisterService("robot", "com.robotraconteur.robotics.robot", robot);
                         service_ctx.SetServiceAttributes(RobotRaconteur.Companion.Util.AttributesUtil.GetDefaultServiceAtributesFromDeviceInfo(robot_info.Item1.device_info));
 
-                        
+
                         Console.WriteLine("Press Ctrl-C to exit");
-                      
+
                         using (var wait_for_exit = new CWaitForExit())
                         {
                             wait_for_exit.WaitForExit();

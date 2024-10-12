@@ -26,7 +26,7 @@ jobs:
     - name: zip
       run: Compress-Archive -Path abb_robotraconteur_driver -DestinationPath abb_robotraconteur_driver.zip
     - name: upload
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: abb_robotraconteur_driver
         path: abb_robotraconteur_driver.zip

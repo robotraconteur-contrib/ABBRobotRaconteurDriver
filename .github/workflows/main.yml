@@ -13,10 +13,10 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-    - name: set up dotnet core 6.0.x
+    - name: set up dotnet core 6.0
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 6.0
+        dotnet-version: 6.0.x
     - name: publish
       run: dotnet publish -c Release /p:Platform="Any CPU" -o --framework=net6.0 abb_robotraconteur_driver
     - name: copy license and readme
